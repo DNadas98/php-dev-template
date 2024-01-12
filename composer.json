@@ -1,0 +1,17 @@
+{
+    "name": "dnadas98/php-starter-template",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "PhpStarter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DNadas98"
+        }
+    ],
+    "require": {
+        "ext-pdo": "*"
+    }
+}

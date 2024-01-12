@@ -1,0 +1,12 @@
+*.env*
+*.crt*
+*.key*
+*.pem*
+
+*.log*
+*log.txt*
+
+vendor
+
+.idea
+
