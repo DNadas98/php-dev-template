@@ -2,9 +2,10 @@
 
 ### The development environment
 
-This template sets up a basic developer environment with Apache, MySQL, PHP 8, Composer, PDO using Docker Compose to simplify development.  
-It is intended for learning basic PHP, not for production.  
-Docker volumes are added for the src and public folders of the project, and the vendor folder of Composer to update the project files dynamically.
+This template sets up a basic developer environment with Apache, MySQL, PHP 8, Composer, PDO using Docker Compose to simplify development.
+It eliminates the need to configure Composer, Apache and PHP locally, and to run a database server locally. 
+The setup is intended for learning basic PHP, not for production.  
+Docker volumes are added for the src and public folders of the project, and the Composer setup to update the project files dynamically.
 
 ### Database setup
 
@@ -22,10 +23,15 @@ Docker volumes are added for the src and public folders of the project, and the 
 - Copy `env.txt` and rename to `.env`, modify values (all required)
 - Modify project name, author, autoloader settings and other project details in the `composer.json`
 - Modify `init.sql` in the mysql folder to change the database layout
-- Run `composer install`
+- Optional, if Composer is installed locally
+  - Run `composer install` in the root folder
+  - Uncomment the volumes for `composer.lock` and `vendor` folders
 - Run the Docker Compose file
-- Run `composer dump-autoload` in the Apache container after any change in namespaces
+
+### Commands in the container
+- To access the Apache, PHP container:
   - `docker ps` to view containers, look for the Apache one
   - `docker exec -it <container ID> bash` to open a shell, in this setup I'd recommend to keep it open
-  - Enter `composer dump-autoload` here when needed
-  - This is not the most elegant solution, but it's better than having to rebuild the Docker Compose setup every time
+  - The project root is the `/var/www` folder
+- Run `composer install` to install new dependencies
+- Run `composer dump-autoload` if there are changes in namespaces
