@@ -5,7 +5,7 @@ services:
     image: mysql:latest
     networks:
       - db_network
-    ports: # Exposes MySQL on port 33066 for development
+    ports: # Exposes MySQL on the port set in the env file for development
       - "${MYSQL_EXPOSED_PORT}:3306"
     env_file:
       - .env
