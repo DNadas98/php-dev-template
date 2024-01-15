@@ -18,7 +18,7 @@ class Database
 
     private static ?Database $instance = null;
 
-    public function __construct()
+    private function __construct()
     {
         $this->host = $_ENV['MYSQL_HOST'];
         $this->port = $_ENV['MYSQL_PORT'];
@@ -28,6 +28,8 @@ class Database
         $this->charset = 'utf8mb4';
         $this->connect();
     }
+    public function __clone() { }
+    public function __wakeup() { }
 
     public static function getInstance(): Database
     {
