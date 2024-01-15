@@ -10,7 +10,7 @@ class ExampleRepository
 
     public function __construct()
     {
-        $database = new Database();
+        $database = Database::getInstance();
         $this->pdo = $database->getPdo();
     }
 

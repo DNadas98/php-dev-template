@@ -1,5 +1,7 @@
 <?php
+
 namespace PhpStarter\Model;
+
 use PDO;
 use PDOException;
 
@@ -14,23 +16,34 @@ class Database
     private string $charset;
     private PDO $pdo;
 
-    public function __construct() {
+    private static ?Database $instance = null;
+
+    public function __construct()
+    {
         $this->host = $_ENV['MYSQL_HOST'];
         $this->port = $_ENV['MYSQL_PORT'];
         $this->db = $_ENV['MYSQL_DATABASE'];
         $this->user = $_ENV['MYSQL_USER'];
         $this->pass = $_ENV['MYSQL_PASSWORD'];
         $this->charset = 'utf8mb4';
-
         $this->connect();
     }
 
-    private function connect(): void {
+    public static function getInstance(): Database
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function connect(): void
+    {
         $dsn = "mysql:host=$this->host;port=$this->port;dbname=$this->db;charset=$this->charset";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_EMULATE_PREPARES => false
         ];
 
         try {
